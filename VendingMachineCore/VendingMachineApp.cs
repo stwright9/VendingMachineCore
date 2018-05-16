@@ -2,7 +2,7 @@
 
 namespace VendingMachineCore
 {
-    class Program
+    class VendingMachineApp
     {
         static void Main(string[] args)
         {

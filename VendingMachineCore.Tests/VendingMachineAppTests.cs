@@ -3,7 +3,7 @@ using Xunit;
 
 namespace VendingMachineCore.Tests
 {
-    public class UnitTest1
+    public class VendingMachineAppTests
     {
         [Fact]
         public void Test1()
