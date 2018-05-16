@@ -6,7 +6,11 @@ namespace VendingMachineCore
     {
         static void Main()
         {
-            
+            Display display = new Display();
+
+
         }
+
+
     }
 }
