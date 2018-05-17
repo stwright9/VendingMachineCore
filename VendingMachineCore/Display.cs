@@ -65,11 +65,15 @@ namespace VendingMachineCore
             return coin;
         }
 
-        public void DisplayMainScreen(Display dis)
+        public void DisplayMainScreen(Display dis, bool purchasedItem)
         {
             Console.Clear();
             Console.WriteLine("Current Change: " + dis.ChangeInserted + "\t" + "Coin Return: " + dis.ChangeReturned + "\n");
-            foreach(KeyValuePair<int, string> i in dis.UserOptions)
+
+            if(purchasedItem)
+                Console.WriteLine("THANK YOU FOR YOUR PURCHASE" + "\n");
+
+            foreach (KeyValuePair<int, string> i in dis.UserOptions)
             {
                 Console.WriteLine(i.Key + "\t" + i.Value);
             }
@@ -86,7 +90,7 @@ namespace VendingMachineCore
             {
                 Console.WriteLine(i.id + "\t" + i.name + "\t"+ i.value + "\t" + i.stock);
             }
-            Console.Write("Select an option: ");            
+            Console.Write("Select an id: ");            
         }
     }
 }

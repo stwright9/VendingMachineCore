@@ -86,7 +86,7 @@ namespace VendingMachineCore
             Inventory itemPurchased = inventory.Where(i => i.Name == name).First();
             inventory = UnloadInventory(itemPurchased, 1, inventory);
             dis.ChangeInserted -= itemPurchased.Value;
-            dis.ReturnChange(dis);
+            //dis.ReturnChange(dis);
             return inventory;
         }        
 
