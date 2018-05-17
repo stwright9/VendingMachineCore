@@ -25,6 +25,7 @@ namespace VendingMachineCore
         }
 
         //Values determined per: https://www.usmint.gov/learn/coin-and-medal-programs/coin-specifications
+        //Invalid amounts will return 0
         public double GetCoinValue(Coins coin)
         {
             if (coin.Weight == 2.5 && coin.Thickness == 1.52)

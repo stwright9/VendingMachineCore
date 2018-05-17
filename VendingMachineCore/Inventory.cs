@@ -43,6 +43,17 @@ namespace VendingMachineCore
             return inventory.Where(i => i.Name == item.Name).Count();
         }
 
+        public double GetItemValue(string name, List<Inventory> inventory)
+        {
+            foreach(Inventory i in inventory)
+            {
+                if (i.Name.Equals(name))
+                    return i.Value;
+            }
+
+            return 0;
+        }
+
         public List<InventoryDisplayItem> GetInventoryList(List<Inventory> inventory, List<Inventory> inventoryStartingItems)
         {
             List<InventoryDisplayItem> displayItems = new List<InventoryDisplayItem>();
@@ -56,6 +67,7 @@ namespace VendingMachineCore
             {
                 displayItem.id = i;
                 displayItem.name = tempArray[i];
+                displayItem.value = GetItemValue(displayItem.name, inventory);
                 item.Name = displayItem.name;
                 stock = GetInventoryCount(item, inventory);
                 if (stock == 0)
@@ -83,12 +95,14 @@ namespace VendingMachineCore
             public int id;
             public string name;
             public string stock;
+            public double value;
 
-            public InventoryDisplayItem(int id, string name, string stock)
+            public InventoryDisplayItem(int id, string name, string stock, double value)
             {
                 this.id = id;
                 this.name = name;
                 this.stock = stock;
+                this.value = value;
             }
         }
     }

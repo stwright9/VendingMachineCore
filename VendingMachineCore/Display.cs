@@ -39,6 +39,7 @@ namespace VendingMachineCore
             return dis;
         }
 
+        //I am assuming your taking the change out of the coin return every time you return coins
         public Display ReturnChange(Display dis)
         {            
             dis.ChangeReturned = dis.ChangeInserted;
@@ -73,6 +74,19 @@ namespace VendingMachineCore
                 Console.WriteLine(i.Key + "\t" + i.Value);
             }
             Console.Write("Select an option: ");
+        }
+
+        public void DisplayInventory(Display dis, List<Inventory> inventory)
+        {
+            Inventory inv = new Inventory();
+            Console.Clear();
+            Console.WriteLine("Current Change: " + dis.ChangeInserted + "\t" + "Coin Return: " + dis.ChangeReturned + "\n");
+            Console.Write("Id" + "\t" + "Name" + "\t" + "Amount" + "\t" + "Stock" + "\n");
+            foreach (Inventory.InventoryDisplayItem i in inv.GetInventoryList(inventory, dis.StartingItems))
+            {
+                Console.WriteLine(i.id + "\t" + i.name + "\t"+ i.value + "\t" + i.stock);
+            }
+            Console.Write("Select an option: ");            
         }
     }
 }
