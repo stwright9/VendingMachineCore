@@ -63,13 +63,13 @@ namespace VendingMachineCore.Tests
 
             string name = products.Where(i => i.Name == "chips").First().Name;
 
-            Assert.True(dis.CanBuyProduct(dis, chips));
+            Assert.True(dis.CanBuyProduct(dis, chips, false));
 
             products = item.BuyProduct(name, products, dis);
 
             Assert.Equal(0.50, dis.ChangeReturned);
             Assert.Equal(2, item.GetInventoryCount(chips, products));
-            Assert.False(dis.CanBuyProduct(dis, chips));
+            Assert.False(dis.CanBuyProduct(dis, chips, false));
         }
 
         [Fact]

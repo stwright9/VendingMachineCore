@@ -35,6 +35,19 @@ namespace VendingMachineCore.Tests
             Assert.Equal(0, dis.ChangeInserted);
         }
 
+        [Fact]
+        public void CanBuyProductTest()
+        {
+            Display dis = new Display();
+            Inventory item = new Inventory();
+            dis.ChangeInserted = 5;
+            item.Value = 5;
+
+            Assert.True(dis.CanBuyProduct(dis, item, false));
+            Assert.True(dis.CanBuyProduct(dis, item, true));
+            dis.ChangeInserted = 4;
+            Assert.False(dis.CanBuyProduct(dis, item, true));
+        }
 
     }
 }

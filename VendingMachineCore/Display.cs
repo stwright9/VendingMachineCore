@@ -47,9 +47,11 @@ namespace VendingMachineCore
             return dis;
         }
 
-        public bool CanBuyProduct(Display dis, Inventory item)
+        public bool CanBuyProduct(Display dis, Inventory item, bool exactChange)
         {
-            if (dis.ChangeInserted >= item.Value)
+            if (dis.ChangeInserted == item.Value && exactChange == true)
+                return true;
+            else if (dis.ChangeInserted >= item.Value && exactChange == false)
                 return true;
 
             return false;

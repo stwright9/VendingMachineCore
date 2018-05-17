@@ -8,10 +8,17 @@ namespace VendingMachineCore
     {
         public static Inventory item = new Inventory();
         public static bool purchasedItem = false;
+        private static bool exactChange = false;
 
         static void Main()
         {
             ConsoleKeyInfo input;
+
+            Console.WriteLine("Do you want exact change mode? (Y/N)");
+            input = Console.ReadKey();
+
+            if (input.Key.Equals(ConsoleKey.Y))
+                exactChange = true;
 
             List<Inventory> products = new List<Inventory>();
             Inventory cola = new Inventory("cola", 1.00);
@@ -23,7 +30,7 @@ namespace VendingMachineCore
             item.LoadInventory(candy, 2, products);
 
             Display display = new Display(products);
-            display.ChangeInserted = 100;
+
             do
             {
                 display.DisplayMainScreen(display, purchasedItem);
@@ -73,7 +80,7 @@ namespace VendingMachineCore
                 }                    
             }
 
-            if(dis.CanBuyProduct(dis, item) && item.GetInventoryCount(item, inventory) > 0)
+            if(dis.CanBuyProduct(dis, item, exactChange) && item.GetInventoryCount(item, inventory) > 0)
             {
                 item.BuyProduct(item.Name, inventory, dis);
                 purchasedItem = true;
