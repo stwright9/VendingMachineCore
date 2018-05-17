@@ -57,10 +57,22 @@ namespace VendingMachineCore
         public Coins InsertCoin()
         {
             Coins coin = new Coins();
+            Console.Clear();
             Console.WriteLine("INSERT COIN" + "\n");
-            coin.GetCoinWeight();
-            coin.GetCoinThickness();
+            coin.Weight = coin.GetCoinWeight();
+            coin.Thickness = coin.GetCoinThickness();
             return coin;
+        }
+
+        public void DisplayMainScreen(Display dis)
+        {
+            Console.Clear();
+            Console.WriteLine("Current Change: " + dis.ChangeInserted + "\t" + "Coin Return: " + dis.ChangeReturned + "\n");
+            foreach(KeyValuePair<int, string> i in dis.UserOptions)
+            {
+                Console.WriteLine(i.Key + "\t" + i.Value);
+            }
+            Console.Write("Select an option: ");
         }
     }
 }

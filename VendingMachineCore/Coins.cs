@@ -42,7 +42,7 @@ namespace VendingMachineCore
         public double GetCoinWeight()
         {
             double result;
-            Console.WriteLine("Enter Weight: " + "\n");
+            Console.Write("Enter Weight: " + "\n");
             if (double.TryParse(Console.ReadLine(), out result))
                 return result;
             else
@@ -52,7 +52,7 @@ namespace VendingMachineCore
         public double GetCoinThickness()
         {
             double result;
-            Console.WriteLine("Enter Thickness: " + "\n");
+            Console.Write("Enter Thickness: " + "\n");
             if (double.TryParse(Console.ReadLine(), out result))
                 return result;
             else
