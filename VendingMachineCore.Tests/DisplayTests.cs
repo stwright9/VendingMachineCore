@@ -18,6 +18,10 @@ namespace VendingMachineCore.Tests
             dis.AddChange(dis, coin);
             dis.AddChange(dis, coin);
             Assert.Equal(1, dis.ChangeInserted);
+
+            coin = new Coins(2.5, 1.52);
+            Assert.Equal(1, dis.AddChange(dis, coin).ChangeInserted);
+            Assert.Equal(0.01, dis.ChangeReturned);
         }
 
         [Fact]

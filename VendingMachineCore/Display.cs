@@ -34,8 +34,13 @@ namespace VendingMachineCore
 
         public Display AddChange(Display dis, Coins coin)
         {
-            double amountToAdd = coin.GetCoinValue(coin);
-            dis.ChangeInserted += amountToAdd;
+            double amountToAdd = coin.GetCoinValue(coin);            
+
+            if (amountToAdd == 0.01)            
+                dis.ChangeReturned += amountToAdd;            
+            else
+                dis.ChangeInserted += amountToAdd;
+
             return dis;
         }
 
