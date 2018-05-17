@@ -3,6 +3,8 @@
 This project was programmed on Visual Studio 2017 Community edition using .NET Core 2.0 and windows 7.
 I inclueded the release folder in this redo for windows/macs. 
 
+Reference for coin weights: https://www.usmint.gov/learn/coin-and-medal-programs/coin-specifications
+
 Steps to install/Run:
 1. Download Visual Studio: https://www.visualstudio.com/vs/features/net-development/
 2. Download .NetCore https://www.microsoft.com/net/download/windows
