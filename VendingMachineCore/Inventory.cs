@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace VendingMachineCore
@@ -42,6 +43,32 @@ namespace VendingMachineCore
             return inventory.Where(i => i.Name == item.Name).Count();
         }
 
+        public List<InventoryDisplayItem> GetInventoryList(List<Inventory> inventory, List<Inventory> inventoryStartingItems)
+        {
+            List<InventoryDisplayItem> displayItems = new List<InventoryDisplayItem>();
+            InventoryDisplayItem displayItem = new InventoryDisplayItem();
+            Inventory item = new Inventory();
+            int stock;
+
+            string[] tempArray = inventoryStartingItems.Select(i => i.Name).ToArray();
+
+            for (int i = 0; i < tempArray.Count(); i++)
+            {
+                displayItem.id = i;
+                displayItem.name = tempArray[i];
+                item.Name = displayItem.name;
+                stock = GetInventoryCount(item, inventory);
+                if (stock == 0)
+                    displayItem.stock = "OUT OF STOCK";
+                else
+                    displayItem.stock = stock.ToString();
+
+                displayItems.Add(displayItem);
+            }
+
+            return displayItems;
+        }
+
         public List<Inventory> BuyProduct(string name, List<Inventory> inventory, Display dis)
         {
             Inventory itemPurchased = inventory.Where(i => i.Name == name).First();
@@ -50,5 +77,19 @@ namespace VendingMachineCore
             dis.ReturnChange(dis);
             return inventory;
         }        
+
+        public struct InventoryDisplayItem
+        {
+            public int id;
+            public string name;
+            public string stock;
+
+            public InventoryDisplayItem(int id, string name, string stock)
+            {
+                this.id = id;
+                this.name = name;
+                this.stock = stock;
+            }
+        }
     }
 }

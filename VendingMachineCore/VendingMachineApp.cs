@@ -5,8 +5,7 @@
         static void Main()
         {
             Display display = new Display();
-
-
+            
 
         }
 

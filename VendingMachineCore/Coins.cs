@@ -1,4 +1,6 @@
-﻿namespace VendingMachineCore
+﻿using System;
+
+namespace VendingMachineCore
 {
     public class Coins
     {
@@ -33,6 +35,26 @@
                 return TypesOfCoins.Dime;
             else if (coin.Weight == 5.670 && coin.Thickness == 1.75)
                 return TypesOfCoins.Quarter;
+            else
+                return 0;
+        }
+
+        public double GetCoinWeight()
+        {
+            double result;
+            Console.WriteLine("Enter Weight: " + "\n");
+            if (double.TryParse(Console.ReadLine(), out result))
+                return result;
+            else
+                return 0;
+        }
+
+        public double GetCoinThickness()
+        {
+            double result;
+            Console.WriteLine("Enter Thickness: " + "\n");
+            if (double.TryParse(Console.ReadLine(), out result))
+                return result;
             else
                 return 0;
         }

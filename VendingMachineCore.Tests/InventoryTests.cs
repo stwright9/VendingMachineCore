@@ -34,7 +34,7 @@ namespace VendingMachineCore.Tests
             List<Inventory> products = new List<Inventory>();
             Inventory item = new Inventory();
             Inventory cola = new Inventory("cola", 1.00);
-            Inventory chips = new Inventory("chips", 0.65);
+            Inventory chips = new Inventory("chips", 0.50);
 
             products = item.LoadInventory(cola, 5);
             products = item.LoadInventory(chips, 3, products);
@@ -49,7 +49,7 @@ namespace VendingMachineCore.Tests
             List<Inventory> products = new List<Inventory>();
             Inventory item = new Inventory();
             Inventory cola = new Inventory("cola", 1.00);
-            Inventory chips = new Inventory("chips", 0.65);
+            Inventory chips = new Inventory("chips", 0.50);
 
             products = item.LoadInventory(cola, 5);
             products = item.LoadInventory(chips, 3, products);
@@ -67,10 +67,35 @@ namespace VendingMachineCore.Tests
 
             products = item.BuyProduct(name, products, dis);
 
-            Assert.Equal(0.35, dis.ChangeReturned);
+            Assert.Equal(0.50, dis.ChangeReturned);
             Assert.Equal(2, item.GetInventoryCount(chips, products));
             Assert.False(dis.CanBuyProduct(dis, chips));
         }
 
+        [Fact]
+        public void GetInventoryListTests()
+        {
+            List<Inventory.InventoryDisplayItem> displayProducts = new List<Inventory.InventoryDisplayItem>();
+            List<Inventory> products = new List<Inventory>();
+            Inventory item = new Inventory();
+            Inventory cola = new Inventory("cola", 1.00);
+            Inventory chips = new Inventory("chips", 0.50);
+            Inventory candy = new Inventory("candy", 0.65);
+
+            item.LoadInventory(cola, 5, products);
+            item.LoadInventory(chips, 3, products);
+            item.LoadInventory(candy, 2, products);
+
+            Display dis = new Display(products);
+
+            displayProducts = item.GetInventoryList(products, dis.StartingItems);
+
+            Assert.Equal(5, Convert.ToInt32(displayProducts.Where(i => i.name.Equals(cola.Name)).Single().stock));
+
+            products = item.UnloadInventory(candy, 2, products);
+            displayProducts = item.GetInventoryList(products, dis.StartingItems);
+
+            Assert.Equal("OUT OF STOCK", displayProducts.Where(i => i.name.Equals(candy.Name)).Single().stock);
+        }
     }
 }
