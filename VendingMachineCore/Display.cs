@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿using System.Collections.Generic;
 namespace VendingMachineCore
 {
     public class Display
@@ -34,6 +31,14 @@ namespace VendingMachineCore
             dis.ChangeReturned = dis.ChangeInserted;
             dis.ChangeInserted = 0;
             return dis;
+        }
+
+        public bool CanBuyProduct(Display dis, Inventory item)
+        {
+            if (dis.ChangeInserted >= item.Value)
+                return true;
+
+            return false;
         }
 
 

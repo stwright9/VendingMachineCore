@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace VendingMachineCore
 {
@@ -39,9 +37,18 @@ namespace VendingMachineCore
             return inventory;
         }
 
-        public int GetInventory(Inventory item, List<Inventory> inventory)
+        public int GetInventoryCount(Inventory item, List<Inventory> inventory)
         {
             return inventory.Where(i => i.Name == item.Name).Count();
         }
+
+        public List<Inventory> BuyProduct(string name, List<Inventory> inventory, Display dis)
+        {
+            Inventory itemPurchased = inventory.Where(i => i.Name == name).First();
+            inventory = UnloadInventory(itemPurchased, 1, inventory);
+            dis.ChangeInserted -= itemPurchased.Value;
+            dis.ReturnChange(dis);
+            return inventory;
+        }        
     }
 }

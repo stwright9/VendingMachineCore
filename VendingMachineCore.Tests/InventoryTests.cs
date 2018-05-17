@@ -39,8 +39,38 @@ namespace VendingMachineCore.Tests
             products = item.LoadInventory(cola, 5);
             products = item.LoadInventory(chips, 3, products);
 
-            Assert.Equal(5, item.GetInventory(cola, products));
-            Assert.Equal(3, item.GetInventory(chips, products));
+            Assert.Equal(5, item.GetInventoryCount(cola, products));
+            Assert.Equal(3, item.GetInventoryCount(chips, products));
         }
+
+        [Fact]
+        public void BuyProductTests()
+        {
+            List<Inventory> products = new List<Inventory>();
+            Inventory item = new Inventory();
+            Inventory cola = new Inventory("cola", 1.00);
+            Inventory chips = new Inventory("chips", 0.65);
+
+            products = item.LoadInventory(cola, 5);
+            products = item.LoadInventory(chips, 3, products);
+
+            Display dis = new Display();
+            Coins coin = new Coins(5.670, 1.75);
+            dis.AddChange(dis, coin);
+            dis.AddChange(dis, coin);
+            dis.AddChange(dis, coin);
+            dis.AddChange(dis, coin);
+
+            string name = products.Where(i => i.Name == "chips").First().Name;
+
+            Assert.True(dis.CanBuyProduct(dis, chips));
+
+            products = item.BuyProduct(name, products, dis);
+
+            Assert.Equal(0.35, dis.ChangeReturned);
+            Assert.Equal(2, item.GetInventoryCount(chips, products));
+            Assert.False(dis.CanBuyProduct(dis, chips));
+        }
+
     }
 }
